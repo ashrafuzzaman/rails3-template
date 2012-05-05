@@ -1,0 +1,3 @@
+<%% execute_js_if(@<%= singular_table_name %>.valid?) do %>
+	$('.<%= plural_table_name %> #new.<%= singular_table_name %>').replaceWith("<%%= escape_javascript(render :partial => '<%= plural_table_name %>/view', :locals => {:<%= singular_table_name %> => @<%= singular_table_name %>}) %>");
+<%% end %>

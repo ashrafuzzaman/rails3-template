@@ -26,3 +26,5 @@ script
 /Gemfile
 /Gemfile.lock
 /Rakefile/config.ru
+/config.ru
+/Rakefile

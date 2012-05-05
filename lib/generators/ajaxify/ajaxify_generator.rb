@@ -1,7 +1,15 @@
 class AjaxifyGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
-  def copy_initializer_file
-    template "erb/create.js.erb", "app/views/#{plural_table_name}/create.js.erb"
+  def copy_view_files
+    available_views.each do |view|
+      filename = "#{view}.js.erb"
+      template "erb/#{filename}", "app/views/#{plural_table_name}/#{filename}"
+    end
+  end
+
+  protected
+  def available_views
+    %w(show new create edit update delete)
   end
 end
