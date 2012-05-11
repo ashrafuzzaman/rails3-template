@@ -4,23 +4,60 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
   argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
 
-  attr_accessor :pr, :r
+  def initialize(args, *options) #:nodoc:
+		super(args, *options)
+    parse_reources!
+  end
 
   def copy_view_files
-  	r_name, pr_name = file_name.split('/')
-    self.r, self.pr = Resource.new(r_name), Resource.new(pr_name)
-
     available_views.each do |view|
       filename = "#{view}.html.erb"
       template "erb/#{filename}", File.join("app/views", r.plural_table_name, filename)
     end
   end
 
-	private
+	protected
+
   def available_views
-    %w(show)
+    %w(index show new edit _form)
   end
 
+	def parse_reources!
+  	r_name = file_name.split(':')[0]
+  	pr_name = file_name.split(':')[1]
+    @r  ||= Resource.new(r_name)
+    @pr ||= Resource.new(pr_name)
+    #puts "R #{r_name}"
+    #puts "PR #{pr_name}"
+	end
+
+	def r
+		@r
+	end
+
+	def pr
+		@pr
+	end
+
+	def index_helper_path
+		uncountable? ? "#{pr_singular_r_plural}_index_path(@#{pr.singular_table_name}})" : "#{pr_singular_r_plural}_path(@#{pr.singular_table_name}})"
+	end
+
+	def edit_link_path
+		"edit_#{singular_path}"
+	end
+
+	def singular_path
+		"#{pr_singular_r_singular}_path"
+	end
+
+	def pr_singular_r_singular
+		"#{pr.singular_table_name}_#{r.singular_table_name}"
+	end
+
+	def pr_singular_r_plural
+		"#{pr.singular_table_name}_#{r.plural_table_name}"
+	end
 end
 
 unless Kernel.respond_to?(:require_relative)

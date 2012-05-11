@@ -1,10 +1,10 @@
-<%%= form_for(@<%= singular_table_name %>) do |f| %>
-  <%% if @<%= singular_table_name %>.errors.any? %>
+<%%= form_for [@<%= pr.singular_table_name %>, @<%= r.singular_table_name %>] do |f| %>
+  <%% if @<%= r.singular_table_name %>.errors.any? %>
     <div id="error_explanation">
-      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+      <h2><%%= pluralize(@<%= r.singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
 
       <ul>
-      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+      <%% @<%= r.singular_table_name %>.errors.full_messages.each do |msg| %>
         <li><%%= msg %></li>
       <%% end %>
       </ul>
@@ -12,7 +12,7 @@
   <%% end %>
 
   <fieldset>
-		<legend><%%= <%= singular_table_name %>_form_title(@<%= singular_table_name %>) %></legend>
+		<legend><%%= <%= r.singular_table_name %>_form_title(@<%= r.singular_table_name %>) %></legend>
 		<ul>
 <% attributes.each do |attribute| -%>
 			<li>
