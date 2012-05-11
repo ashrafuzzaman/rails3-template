@@ -23,12 +23,9 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   end
 
 	def parse_reources!
-  	r_name = file_name.split(':')[0]
-  	pr_name = file_name.split(':')[1]
+  	pr_name, r_name = file_name.split(':')
     @r  ||= Resource.new(r_name)
     @pr ||= Resource.new(pr_name)
-    #puts "R #{r_name}"
-    #puts "PR #{pr_name}"
 	end
 
 	def r

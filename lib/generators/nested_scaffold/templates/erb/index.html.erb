@@ -4,9 +4,9 @@
   <thead>
     <tr>
   <% attributes.each do |attribute| -%>
-      <th><%= attribute.human_name %></th>
+    <th><%= attribute.human_name %></th>
   <% end -%>
-      <th></th>
+    <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -15,15 +15,15 @@
   <tbody>
     <%%= content_tag_for(:tr, @<%= r.plural_table_name %>) do |<%= r.singular_table_name %>| %>
   <% attributes.each do |attribute| -%>
-      <td><%%= <%= r.singular_table_name %>.<%= attribute.name %> %></td>
+    <td><%%= <%= r.singular_table_name %>.<%= attribute.name %> %></td>
   <% end -%>
-      <td><%%= link_to 'Show', <%= singular_path %>(@<%= pr.singular_table_name %>) %></td>
+    <td><%%= link_to 'Show', <%= singular_path %>(@<%= pr.singular_table_name %>) %></td>
       <td><%%= link_to 'Edit', <%= edit_link_path %>(@<%= pr.singular_table_name %>, <%= r.singular_table_name %>) %></td>
-      <td><%%= link_to 'Destroy', <%= singular_table_name %>, confirm: 'Are you sure?', method: :delete %></td>
+      <td><%%= link_to 'Destroy', <%= singular_path %>(@<%= pr.singular_table_name %>) %>, confirm: 'Are you sure?', method: :delete %></td>
     <%% end %>
   </tbody>
 </table>
 
 <br />
 
-<%%= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path %>
+<%%= link_to 'New <%= human_name %>', new_<%= singular_path %>(@<%= pr.singular_table_name %>) %>

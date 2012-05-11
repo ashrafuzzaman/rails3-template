@@ -9,7 +9,7 @@ class Resource
   end
 
 	def class_name
-    @class_name ||= file_name.camelize
+    @class_name ||= singular_name.camelize
   end
 
   def human_name
