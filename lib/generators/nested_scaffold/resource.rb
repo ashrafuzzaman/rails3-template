@@ -34,10 +34,6 @@ class Resource
     singular_name == plural_name
   end
 
-  def index_helper
-    uncountable? ? "#{plural_table_name}_index" : plural_table_name
-  end
-
   def singular_table_name
     @singular_table_name ||= (pluralize_table_names? ? table_name.singularize : table_name)
   end
@@ -52,6 +48,10 @@ class Resource
 
   def route_url
     @route_url ||= class_path.collect{|dname| "/" + dname  }.join('') + "/" + plural_file_name
+  end
+
+  def orm_instance
+  	singular_table_name
   end
 
   # Tries to retrieve the application name or simple return application.

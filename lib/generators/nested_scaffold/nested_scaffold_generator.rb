@@ -16,6 +16,16 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
     end
   end
 
+  def copy_controller
+    template 'controller.rb', File.join('app/controllers', class_path, "#{r.name}_controller.rb")
+  end
+
+  #def add_routes
+  #  actions.reverse.each do |action|
+  #    route %{get "#{file_name}/#{action}"}
+  #  end
+  #end
+
 	protected
 
   def available_views
@@ -24,8 +34,8 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
 
 	def parse_reources!
   	pr_name, r_name = file_name.split(':')
-    @r  ||= Resource.new(r_name)
-    @pr ||= Resource.new(pr_name)
+    @r  ||= Resource.new(r_name.downcase)
+    @pr ||= Resource.new(pr_name.downcase)
 	end
 
 	def r
@@ -37,7 +47,7 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
 	end
 
 	def index_helper_path
-		uncountable? ? "#{pr_singular_r_plural}_index_path(@#{pr.singular_table_name}})" : "#{pr_singular_r_plural}_path(@#{pr.singular_table_name}})"
+		uncountable? ? "#{pr_singular_r_plural}_index_path(@#{pr.singular_table_name}})" : "#{pr_singular_r_plural}_path(@#{pr.singular_table_name})"
 	end
 
 	def edit_link_path
@@ -55,6 +65,11 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
 	def pr_singular_r_plural
 		"#{pr.singular_table_name}_#{r.plural_table_name}"
 	end
+
+	def controller_class_name
+		"#{r.class_name}Controller"
+	end
+
 end
 
 unless Kernel.respond_to?(:require_relative)
