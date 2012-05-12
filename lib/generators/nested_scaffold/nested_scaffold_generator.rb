@@ -7,6 +7,7 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   def initialize(args, *options) #:nodoc:
 		super(args, *options)
     parse_reources!
+    assign_names!(r.name)
   end
 
   def copy_view_files
