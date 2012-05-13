@@ -1,4 +1,5 @@
 require_relative 'resource'
+require 'rails/generators/resource_helpers'
 
 class NestedScaffoldGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
@@ -25,6 +26,12 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   #    route %{get "#{file_name}/#{action}"}
   #  end
   #end
+	hook_for :template_engine, :test_framework, :as => :scaffold
+
+  # Invoke the helper using the controller name (pluralized)
+  hook_for :helper, :as => :scaffold do |invoked|
+    invoke invoked, [ controller_name ]
+  end
 
 	protected
 
