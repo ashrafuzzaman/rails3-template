@@ -1,0 +1,13 @@
+<div class="alert-notify alert">
+  <a class="close" href="#">&times;</a>
+  <h2><%%= t(:notification_title) %></h2>
+  <ul>
+  	<%% if message %>
+  		<li><%%= msg %></li>
+  	<%% else %>
+	    <%% messages.each do |msg| %>
+	        <li><%%= msg %></li>
+	    <%% end %>
+    <%% end %>
+  </ul>
+</div>

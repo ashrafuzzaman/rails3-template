@@ -6,9 +6,9 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
 
   def initialize(args, *options) #:nodoc:
+    parse_reources!(args[0])
+    args[0] = r.name
 		super(args, *options)
-    parse_reources!
-    assign_names!(r.name)
   end
 
   def copy_view_files
@@ -27,12 +27,8 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   #    route %{get "#{file_name}/#{action}"}
   #  end
   #end
-	hook_for :template_engine, :test_framework, :as => :scaffold
 
-  # Invoke the helper using the controller name (pluralized)
-  hook_for :helper, :as => :scaffold do |invoked|
-    invoke invoked, [ controller_name ]
-  end
+  hook_for :test_framework, :messages, :as => :scaffold
 
 	protected
 
@@ -40,8 +36,8 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
     %w(index show new edit _form)
   end
 
-	def parse_reources!
-  	pr_name, r_name = file_name.split(':')
+	def parse_reources!(name)
+  	pr_name, r_name = name.split(':')
     @r  ||= Resource.new(r_name.downcase)
     @pr ||= Resource.new(pr_name.downcase)
 	end
