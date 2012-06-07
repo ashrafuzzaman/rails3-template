@@ -4,10 +4,13 @@ require 'rails/generators/resource_helpers'
 class NestedScaffoldGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
   argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
+  class_option :stylesheets, :type => :boolean, :desc => "Generate Stylesheets"
+  class_option :stylesheet_engine, :desc => "Engine for Stylesheets"
 
   def initialize(args, *options) #:nodoc:
     parse_reources!(args[0])
     args[0] = r.name
+    args << "#{r.name.downcase}:references"
 		super(args, *options)
   end
 
@@ -28,7 +31,8 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   #  end
   #end
 
-  hook_for :test_framework, :messages, :as => :scaffold
+  hook_for :test_framework, :as => :scaffold
+  hook_for :messages
 
 	protected
 
@@ -48,6 +52,10 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
 
 	def pr
 		@pr
+	end
+
+	def controller_name
+		"#{class_name}_controller"
 	end
 
 	def index_helper_path
