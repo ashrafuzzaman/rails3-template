@@ -31,8 +31,13 @@ class NestedScaffoldGenerator < Rails::Generators::NamedBase
   #  end
   #end
 
-  hook_for :test_framework, :as => :scaffold
+  hook_for :test_framework, :in => :rails, :as => :scaffold
   hook_for :messages
+  hook_for :helper, :in => :rails, :as => :scaffold do |invoked|
+    invoke invoked, [ controller_name ]
+  end
+
+  hook_for :orm, :required => true
 
 	protected
 
