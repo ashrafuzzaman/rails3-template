@@ -19,6 +19,12 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
 		inject_into_class "app/models/#{pr.singular_table_name}.rb", pr.class_name, "  has_many :#{plural_table_name}\n"
   end
 
+  def add_in_routes
+		gsub_file 'config/routes.rb', Regexp.new("resources :#{plural_table_name}\n"), ''
+		gsub_file 'config/routes.rb', Regexp.new("resources :#{pr.plural_table_name}\n"), "resources :#{pr.plural_table_name} do\n  end\n"
+	  inject_into_file 'config/routes.rb', "\n    resources :#{plural_table_name}\n", :after => "resources :#{pr.plural_table_name} do"
+  end
+
   protected
 
 	def singular_path
@@ -26,7 +32,7 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
 	end
 
 	def index_path
-		"#{pr.singular_table_name}_#{singular_table_name}_path(@#{pr.singular_table_name})"
+		"#{pr.singular_table_name}_#{plural_table_name}_path(@#{pr.singular_table_name})"
 	end
 
 	def resource_path
