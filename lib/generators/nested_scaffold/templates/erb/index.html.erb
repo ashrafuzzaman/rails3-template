@@ -1,4 +1,4 @@
-<h1>Listing <%= r.plural_table_name %></h1>
+<h1>Listing <%= plural_table_name %></h1>
 
 <table>
   <thead>
@@ -13,12 +13,12 @@
   </thead>
 
   <tbody>
-    <%%= content_tag_for(:tr, @<%= r.plural_table_name %>) do |<%= r.singular_table_name %>| %>
+    <%%= content_tag_for(:tr, @<%= plural_table_name %>) do |<%= singular_table_name %>| %>
   <% attributes.each do |attribute| -%>
-    <td><%%= <%= r.singular_table_name %>.<%= attribute.name %> %></td>
+    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
   <% end -%>
     <td><%%= link_to 'Show', <%= singular_path %>(@<%= pr.singular_table_name %>) %></td>
-      <td><%%= link_to 'Edit', <%= edit_link_path %>(@<%= pr.singular_table_name %>, <%= r.singular_table_name %>) %></td>
+      <td><%%= link_to 'Edit', edit_<%= singular_path %>(@<%= pr.singular_table_name %>, <%= singular_table_name %>) %></td>
       <td><%%= link_to 'Destroy', <%= singular_path %>(@<%= pr.singular_table_name %>) %>, confirm: 'Are you sure?', method: :delete %></td>
     <%% end %>
   </tbody>
