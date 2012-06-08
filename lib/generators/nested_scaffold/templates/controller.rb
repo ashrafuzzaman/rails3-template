@@ -26,7 +26,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       if @<%= singular_table_name %>.save
-        format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully created.'" %> }
+        format.html { redirect_to [@<%= pr.singular_table_name %>, @<%= singular_table_name %>], notice: <%= "'#{human_name} was successfully created.'" %> }
         format.json { render json: <%= "@#{singular_table_name}" %>, status: :created }
         format.js { flash[:notice] = <%= "'#{human_name} was created.'" %> }
       else
@@ -42,7 +42,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       if @<%= singular_table_name %>.update_attributes(params[:<%= singular_table_name %>])
-        format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully updated.'" %> }
+        format.html { redirect_to [@<%= pr.singular_table_name %>, @<%= singular_table_name %>], notice: <%= "'#{human_name} was successfully updated.'" %> }
         format.json { head :no_content }
         format.js { flash[:notice] = <%= "'#{human_name} was successfully updated.'" %> }
       else
@@ -58,7 +58,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_table_name %>.destroy
 
     respond_to do |format|
-      format.html { redirect_to <%= index_helper %>_url }
+      format.html { redirect_to <%= "#{pr.singular_table_name}_#{plural_table_name}" %>_path }
       format.json { head :no_content }
     end
   end

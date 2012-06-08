@@ -1,4 +1,4 @@
-<%%= form_for [@<%= pr.singular_table_name %>, @<%= singular_table_name %>] do |f| %>
+<%%= form_for <%= resource_path %> do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">
       <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
@@ -15,10 +15,12 @@
 		<legend><%= class_name %></legend>
 		<ul>
 <% attributes.each do |attribute| -%>
+	<% unless attribute.reference? -%>
 			<li>
 		    <%%= f.label :<%= attribute.name %> %><br />
 		    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
 			</li>
+	<% end -%>
 <% end -%>
 		</ul>
   </fieldset>

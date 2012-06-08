@@ -15,10 +15,22 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
     end
   end
 
+  def add_has_many
+		inject_into_class "app/models/#{pr.singular_table_name}.rb", pr.class_name, "  has_many :#{plural_table_name}\n"
+  end
+
   protected
 
 	def singular_path
 		"#{pr.singular_table_name}_#{singular_table_name}_path"
+	end
+
+	def index_path
+		"#{pr.singular_table_name}_#{singular_table_name}_path(@#{pr.singular_table_name})"
+	end
+
+	def resource_path
+		"[@#{pr.singular_table_name}, @#{singular_table_name}]"
 	end
 
 	def available_views
@@ -29,8 +41,11 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
   	parent_ar = self.attributes.to_s.scan(/(\w*):references/)[0]
   	if parent_ar
   		parent = parent_ar[0]
-  		say(parent, :green)
   		@pr ||= Resource.new(parent.downcase)
+  	end
+  	if pr.nil?
+  		say 'You need at least one model:references for this to work', :red
+  		exit 1
   	end
     super
   end
