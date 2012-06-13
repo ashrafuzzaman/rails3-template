@@ -9,9 +9,10 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
   end
 
   def copy_view_files
+  	template_eng = Rails.application.config.generators.options[:rails][:template_engine] || 'erb'
     available_views.each do |view|
       filename = "#{view}.html.erb"
-      template "erb/#{filename}", File.join("app/views", plural_table_name, filename)
+      template "#{template_eng}/#{filename}", File.join("app/views", plural_table_name, filename)
     end
   end
 

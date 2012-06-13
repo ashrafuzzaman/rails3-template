@@ -1,8 +1,8 @@
 Description:
-    Explain the generator
+    This is a rails 3 nested scaffold generator. For now it only supports erb templates.
 
 Example:
-    rails generate nested_scaffold Thing
+    rails generate nested_scaffold comment title:string blog:references user:references
 
-    This will create:
-        what/will/it/create
+Explanation:
+		The parent resource is choosen from the first decleared references type. Here the parent resource is blog
