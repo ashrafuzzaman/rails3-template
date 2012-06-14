@@ -1,14 +1,12 @@
 <h1>Listing <%= plural_table_name %></h1>
 
-<table>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
   <% attributes.each do |attribute| -%>
     <th><%= attribute.human_name %></th>
   <% end -%>
     <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -17,13 +15,16 @@
   <% attributes.each do |attribute| -%>
     <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
   <% end -%>
-    <td><%%= link_to 'Show', [@<%= pr.singular_table_name %>, <%= singular_table_name %>] %></td>
-      <td><%%= link_to 'Edit', edit_<%= singular_path %>(@<%= pr.singular_table_name %>, <%= singular_table_name %>) %></td>
-      <td><%%= link_to 'Destroy', [@<%= pr.singular_table_name %>, <%= singular_table_name %>], confirm: 'Are you sure?', method: :delete %></td>
+    <td><%%= link_to 'Show', [@<%= pr.singular_table_name %>, <%= singular_table_name %>], class: 'btn btn-mini' %>
+      <%%= link_to 'Edit', edit_<%= singular_path %>(@<%= pr.singular_table_name %>, <%= singular_table_name %>), class: 'btn btn-mini' %>
+      <%%= link_to 'Destroy', [@<%= pr.singular_table_name %>, <%= singular_table_name %>], confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini btn-danger' %>
+    </td>
     <%% end %>
   </tbody>
 </table>
 
 <br />
 
-<%%= link_to 'New <%= human_name %>', new_<%= singular_path %>(@<%= pr.singular_table_name %>) %>
+<div class="form-actions">
+<%%= link_to 'New <%= human_name %>', new_<%= singular_path %>(@<%= pr.singular_table_name %>), :class => 'btn btn-primary' %>
+</div>

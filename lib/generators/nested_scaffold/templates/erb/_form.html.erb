@@ -11,20 +11,21 @@
     </div>
   <%% end %>
 
-  <fieldset>
-		<legend><%= class_name %></legend>
-		<ul>
+	<fieldset>
+		<legend><%= singular_table_name %></legend>
 <% attributes.each do |attribute| -%>
 	<% unless attribute.reference? -%>
-			<li>
-		    <%%= f.label :<%= attribute.name %> %><br />
-		    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
-			</li>
-	<% end -%>
+    <div class="control-group">
+      <%%= f.label :<%= attribute.name %>, :class => 'control-label' %>
+      <div class="controls">
+        <%%= f.<%= attribute.field_type %> :<%= attribute.name %>, :class => 'input-xlarge' %>
+      </div>
+    </div>
+  <% end -%>
 <% end -%>
-		</ul>
   </fieldset>
-  <div class="actions">
-    <%%= f.submit %>
+  <div class="form-actions">
+    <%%= f.submit :class => 'btn btn-primary' %>
+    <button class="btn">Cancel</button>
   </div>
 <%% end %>
