@@ -1,4 +1,4 @@
-<%%= form_for <%= resource_path %> do |f| %>
+<%%= form_for <%= resource_path %>, html: {class: 'well'} do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">
       <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
