@@ -23,7 +23,7 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
   def add_in_routes
 		gsub_file 'config/routes.rb', Regexp.new("resources :#{plural_table_name}\n"), ''
 		gsub_file 'config/routes.rb', Regexp.new("resources :#{pr.plural_table_name}\n"), "resources :#{pr.plural_table_name} do\n  end\n"
-	  inject_into_file 'config/routes.rb', "\n    resources :#{plural_table_name}\n", :after => "resources :#{pr.plural_table_name} do"
+	  inject_into_file 'config/routes.rb', "\n    resources :#{plural_table_name}", :after => "resources :#{pr.plural_table_name} do"
   end
 
   protected
