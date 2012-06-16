@@ -21,11 +21,11 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
   def modify_view_files
     template_eng = Rails.application.config.generators.options[:rails][:template_engine] || 'erb'
 
-    modify_edit_view(plural_table_name)
-    modify_form(plural_table_name)
-    modify_index_view(plural_table_name)
-		modify_show_view(plural_table_name)
-		modify_new_view(plural_table_name)    
+    modify_edit_view(plural_table_name, template_eng)
+    modify_form(plural_table_name, template_eng)
+    modify_index_view(plural_table_name, template_eng)
+		modify_show_view(plural_table_name, template_eng)
+		modify_new_view(plural_table_name, template_eng)    
   end
 
   protected
@@ -48,22 +48,22 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
     					index_path
   end
 
-  def modify_edit_view(plural_table_name)
-    file_name = "edit.html.erb"
+  def modify_edit_view(plural_table_name, template_eng)
+    file_name = "edit.html.#{template_eng}"
     modify_resource_link(plural_table_name, file_name)
 		modify_index_link(plural_table_name, file_name)
   end
 
-  def modify_form(plural_table_name)
-  	file_name = "_form.html.erb"
+  def modify_form(plural_table_name, template_eng)
+  	file_name = "_form.html.#{template_eng}"
     gsub_file File.join("app/views", plural_table_name, file_name), 
 				Regexp.new("(form_for.*)@#{singular_table_name}(.*do)"), 
 				"\\1#{resource_path}\\2"
 		modify_index_link(plural_table_name, file_name)
   end
 
-  def modify_index_view(plural_table_name)
-  	file_name = "index.html.erb"
+  def modify_index_view(plural_table_name, template_eng)
+  	file_name = "index.html.#{template_eng}"
     modify_resource_link(plural_table_name, file_name)
 		modify_edit_link(plural_table_name, file_name)
     gsub_file File.join("app/views", plural_table_name, file_name), 
@@ -71,14 +71,14 @@ class NestedScaffoldGenerator < Rails::Generators::ScaffoldGenerator
 				"new_#{singular_path}(@#{pr.singular_table_name})"
   end
 
-  def modify_show_view(plural_table_name)
-    file_name = "show.html.erb"
+  def modify_show_view(plural_table_name, template_eng)
+    file_name = "show.html.#{template_eng}"
     modify_edit_link(plural_table_name, file_name)
 		modify_index_link(plural_table_name, file_name)
   end
 
-  def modify_new_view(plural_table_name)
-    file_name = "new.html.erb"
+  def modify_new_view(plural_table_name, template_eng)
+    file_name = "new.html.#{template_eng}"
 		modify_index_link(plural_table_name, file_name)
   end
 
