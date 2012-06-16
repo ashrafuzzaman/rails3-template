@@ -1,8 +1,5 @@
 Description:
-    Explain the generator
+    rails g template:install twitter
 
 Example:
-    rails generate install Thing
-
-    This will create:
-        what/will/it/create
+    Copies the templates in to the lib directory. So that scaffold will use these templates to generate.

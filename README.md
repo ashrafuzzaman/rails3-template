@@ -29,5 +29,5 @@ Install my templates
 ===========================
 I preffer to use twitter bootstrap. So you can install twitter bootstrap supported templates by,
 ```ruby
-rails g template:install
+rails g template:install twitter
 ```
