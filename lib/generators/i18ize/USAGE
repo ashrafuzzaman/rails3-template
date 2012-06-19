@@ -1,0 +1,5 @@
+Description:
+    This will create internationalization file and add texts to the language files from rails generated contents.
+
+Example:
+    rails generate i18ize Post
