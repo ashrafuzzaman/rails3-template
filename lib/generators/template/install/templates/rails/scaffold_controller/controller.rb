@@ -25,7 +25,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       if @<%= orm_instance.save %>
-        format.html { redirect_to @<%= singular_table_name %>, notice: t(:'<%= "msg.#{singular_table_name}.created" %>') }
+        format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully created.'" %> }
         format.json { render json: <%= "@#{singular_table_name}" %>, status: :created, location: <%= "@#{singular_table_name}" %> }
         format.js { flash[:notice] = t(:'<%= "msg.#{singular_table_name}.created" %>') }
       else
