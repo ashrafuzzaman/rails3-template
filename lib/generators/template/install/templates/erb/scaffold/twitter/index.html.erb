@@ -16,9 +16,9 @@
       <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
   <% end -%>
       <td>
-      	<%%= link_to t(:'links.show'), <%= singular_table_name %>, class: 'btn btn-mini' %>
-      	<%%= link_to t(:'links.edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-mini' %>
-      	<%%= link_to t(:'links.destroy'), <%= singular_table_name %>, confirm: t(:'msg.destroy.confirm'), method: :delete, class: 'btn btn-mini btn-danger' %>
+      	<%%= link_to 'Show', <%= singular_table_name %>, class: 'btn btn-mini' %>
+      	<%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-mini' %>
+      	<%%= link_to 'Destroy', <%= singular_table_name %>, confirm: t(:'msg.destroy.confirm'), method: :delete, class: 'btn btn-mini btn-danger' %>
       </td>
     <%% end %>
   </tbody>
@@ -27,5 +27,5 @@
 <br />
 
 <div class="form-actions">
-  <%%= link_to t(:'links.new_<%= human_name %>'), new_<%= singular_table_name %>_path, class: 'btn btn-primary' %>
+    <%%= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, class: 'btn btn-primary' %>
 </div>

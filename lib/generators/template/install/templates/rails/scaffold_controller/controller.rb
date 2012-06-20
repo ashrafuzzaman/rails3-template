@@ -27,7 +27,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       if @<%= orm_instance.save %>
         format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully created.'" %> }
         format.json { render json: <%= "@#{singular_table_name}" %>, status: :created, location: <%= "@#{singular_table_name}" %> }
-        format.js { flash[:notice] = t(:'<%= "msg.#{singular_table_name}.created" %>') }
+        format.js { flash[:notice] = <%= "'#{human_name} was successfully created.'" %> }
       else
         format.html { render action: "new" }
         format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
@@ -41,9 +41,9 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       if @<%= orm_instance.update_attributes("params[:#{singular_table_name}]") %>
-        format.html { redirect_to @<%= singular_table_name %>, notice: t(:'<%= "msg.#{singular_table_name}.updated" %>') }
+        format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully updated.'" %> }
         format.json { head :no_content }
-        format.js { flash[:notice] = t(:'<%= "msg.#{singular_table_name}.updated" %>') }
+        format.js { flash[:notice] = <%= "'#{human_name} was successfully updated.'" %> }
       else
         format.html { render action: "edit" }
         format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
