@@ -18,7 +18,7 @@
       <td>
       	<%%= link_to 'Show', <%= singular_table_name %>, class: 'btn btn-mini' %>
       	<%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-mini' %>
-      	<%%= link_to 'Destroy', <%= singular_table_name %>, confirm: t(:'msg.destroy.confirm'), method: :delete, class: 'btn btn-mini btn-danger' %>
+      	<%%= link_to 'Destroy', <%= singular_table_name %>, confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini btn-danger' %>
       </td>
     <%% end %>
   </tbody>
