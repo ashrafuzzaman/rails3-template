@@ -35,7 +35,7 @@ class I18izeGenerator < Rails::Generators::NamedBase
   end
   
   def language_hash
-    {"msg#{singular_table_name}.created" => "#{human_name} was successfully created.",
+    {"msg.#{singular_table_name}.created" => "#{human_name} was successfully created.",
     "msg.#{singular_table_name}.updated" => "#{human_name} was successfully updated.",
     "msg.#{singular_table_name}.destroy_confirm" => "Are you sure?",
     "link.#{singular_table_name}.show" => "Show",
@@ -50,5 +50,6 @@ class I18izeGenerator < Rails::Generators::NamedBase
     language_hash.each do |lng_key, str|
       lng_entries += "  #{lng_key}: #{str}\n"
     end
+    lng_entries
   end
 end
