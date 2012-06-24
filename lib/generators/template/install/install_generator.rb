@@ -22,6 +22,11 @@ module Template
 	        copy_file file_with_ext, "lib/templates/#{file_with_ext}"
 		  end
 
+      def copy_shared_templates
+        file_with_ext = "erb/scaffold/#{name}/shared/_notifications.html.erb"
+          copy_file file_with_ext, "app/views/shared/_notifications.html.erb"
+      end
+
 		  private
 		  	def available_view_templates
 		      %w(show new edit _form index)
