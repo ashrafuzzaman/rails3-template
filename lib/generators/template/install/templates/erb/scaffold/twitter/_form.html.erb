@@ -1,16 +1,5 @@
 <%%= form_for(@<%= singular_table_name %>, html: {class: 'form-horizontal well'}) do |f| %>
-  <%% if @<%= singular_table_name %>.errors.any? %>
-    <div id="error_explanation">
-      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
-
-      <ul>
-      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-        <li><%%= msg %></li>
-      <%% end %>
-      </ul>
-    </div>
-  <%% end %>
-
+  <%%= render :partial => 'shared/notifications', :locals => {:model => @<%= singular_table_name %>} %>
   <fieldset>
 		<legend><%%= <%= singular_table_name %>_form_title(@<%= singular_table_name %>) %></legend>
 <% attributes.each do |attribute| -%>
