@@ -1,0 +1,10 @@
+<% {notice: 'notify', error: 'error'}.each do |key, css_class| %>
+  <% if flash[key] %>
+    <div class=<%="alert-#{css_class} alert"%>>
+      <a class="close" href="#">&times;</a>
+      <ul>
+    		<li><%= flash[key] %></li>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

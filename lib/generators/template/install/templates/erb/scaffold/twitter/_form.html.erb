@@ -1,5 +1,5 @@
 <%%= form_for(@<%= singular_table_name %>, html: {class: 'form-horizontal well'}) do |f| %>
-  <%%= render :partial => 'shared/notifications', :locals => {:model => @<%= singular_table_name %>} %>
+  <%%= render :partial => 'shared/error', :locals => {:model => @<%= singular_table_name %>} %>
   <fieldset>
 		<legend><%%= <%= singular_table_name %>_form_title(@<%= singular_table_name %>) %></legend>
 <% attributes.each do |attribute| -%>
