@@ -1,9 +1,0 @@
-Description:
-    This generates message partials for displaying messages/notifications
-
-Example:
-    rails generate messages
-
-    This will create:
-        app/views/shared/_errors.erb.html
-        app/views/shared/_notifications.erb.html
