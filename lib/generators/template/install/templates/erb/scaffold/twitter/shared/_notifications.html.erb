@@ -8,7 +8,7 @@
   </div>
 <% end %>
 
-<% if !model.errors.empty? || flash[:error] %>
+<% if !model.errors.any? || flash[:error] %>
   <div class="alert-error alert">
     <a class="close" href="#">&times;</a>
     <h2><%= t(:error_msg_title) %></h2>
